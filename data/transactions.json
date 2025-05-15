@@ -1,0 +1,44 @@
+[
+  {
+    "_id": { "$oid": "609ce01ba08d53001c8f0031" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0001" },
+    "account_id": { "$oid": "609cde1ba08d53001c8f0011" },
+    "category_id": { "$oid": "609cdf1ba08d53001c8f0021" },
+    "description": "Recebimento Salário Mensal - Admin",
+    "amount": 7500.00,
+    "type": "income",
+    "date": { "$date": "2024-05-05T10:00:00.000Z" },
+    "notes": "Referente ao mês de Abril",
+    "updated_date": { "$date": "2024-05-05T10:00:00.000Z" },
+    "createdAt": { "$date": "2024-05-05T10:00:00.000Z" },
+    "updatedAt": { "$date": "2024-05-05T10:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609ce01ba08d53001c8f0032" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "account_id": { "$oid": "609cde1ba08d53001c8f0012" },
+    "category_id": { "$oid": "609cdf1ba08d53001c8f0022" },
+    "description": "Almoço Restaurante X",
+    "amount": -45.50,
+    "type": "expense",
+    "date": { "$date": "2024-05-10T12:30:00.000Z" },
+    "notes": "",
+    "updated_date": { "$date": "2024-05-10T12:30:00.000Z" },
+    "createdAt": { "$date": "2024-05-10T12:30:00.000Z" },
+    "updatedAt": { "$date": "2024-05-10T12:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609ce01ba08d53001c8f0033" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "account_id": { "$oid": "609cde1ba08d53001c8f0013" }, 
+    "category_id": { "$oid": "609cdf1ba08d53001c8f0023" },
+    "description": "Combustível Posto Y",
+    "amount": -150.00,
+    "type": "expense",
+    "date": { "$date": "2024-05-12T08:15:00.000Z" },
+    "notes": "Viagem final de semana",
+    "updated_date": { "$date": "2024-05-12T08:15:00.000Z" },
+    "createdAt": { "$date": "2024-05-12T08:15:00.000Z" },
+    "updatedAt": { "$date": "2024-05-12T08:15:00.000Z" }
+  }
+]

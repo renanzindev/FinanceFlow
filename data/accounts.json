@@ -1,0 +1,32 @@
+[
+  {
+    "_id": { "$oid": "609cde1ba08d53001c8f0011" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0001" },
+    "name": "Conta Corrente Admin",
+    "type": "checking",
+    "balance": 15000.75,
+    "currency": "BRL",
+    "createdAt": { "$date": "2024-05-14T18:05:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:05:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609cde1ba08d53001c8f0012" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "name": "Carteira Pessoal Usuário",
+    "type": "cash",
+    "balance": 550.20,
+    "currency": "BRL",
+    "createdAt": { "$date": "2024-05-14T18:06:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:06:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609cde1ba08d53001c8f0013" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "name": "Cartão de Crédito Usuário",
+    "type": "credit_card",
+    "balance": -1250.99, 
+    "currency": "BRL",
+    "createdAt": { "$date": "2024-05-14T18:07:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:07:00.000Z" }
+  }
+]

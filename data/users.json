@@ -1,0 +1,24 @@
+[
+  {
+    "_id": { "$oid": "609cdd2ba08d53001c8f0001" },
+    "full_name": "Administrador",
+    "email": "admin@admin.com",
+    "password": "$2b$10$m1hcrbS..IvoGe1GuVBGfOiVEa1OlGCbRikOhlrYFAH/DdWxYWAWS",
+    "role": "admin",
+    "currency": "BRL",
+    "dateFormat": "dd/MM/yyyy",
+    "createdAt": { "$date": "2024-05-14T18:00:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "full_name": "Usuário Comum",
+    "email": "user@example.com",
+    "password": "$2b$10$X3sI7EtUMhwGHlLuNnMMyuTDabAjsUWjhg0eTGYWJKDodQscpb5VW",
+    "role": "user",
+    "currency": "BRL",
+    "dateFormat": "dd/MM/yyyy",
+    "createdAt": { "$date": "2024-05-14T18:01:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:01:00.000Z" }
+  }
+]

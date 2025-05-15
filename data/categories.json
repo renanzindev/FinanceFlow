@@ -1,0 +1,45 @@
+[
+  {
+    "_id": { "$oid": "609cdf1ba08d53001c8f0021" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0001" },
+    "name": "Salário Admin",
+    "type": "income",
+    "icon": "DollarSign",
+    "color": "#22c55e",
+    "is_global": false,
+    "createdAt": { "$date": "2024-05-14T18:10:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:10:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609cdf1ba08d53001c8f0022" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "name": "Alimentação Usuário",
+    "type": "expense",
+    "icon": "Utensils",
+    "color": "#ef4444",
+    "is_global": false,
+    "createdAt": { "$date": "2024-05-14T18:11:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:11:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609cdf1ba08d53001c8f0023" },
+    "user_id": { "$oid": "609cdd2ba08d53001c8f0002" },
+    "name": "Transporte Usuário",
+    "type": "expense",
+    "icon": "Car",
+    "color": "#f97316",
+    "is_global": false,
+    "createdAt": { "$date": "2024-05-14T18:12:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:12:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "609cdf1ba08d53001c8f0024" },
+    "name": "Moradia (Global)",
+    "type": "expense",
+    "icon": "Home",
+    "color": "#3b82f6",
+    "is_global": true, 
+    "createdAt": { "$date": "2024-05-14T18:09:00.000Z" },
+    "updatedAt": { "$date": "2024-05-14T18:09:00.000Z" }
+  }
+]

@@ -41,7 +41,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CategoryDialog from "../components/settings/CategoryDialog";
-import { Upload as CoreUpload } from "@/api/integrations";
+import { UploadFile as CoreUpload } from "@/api/integrations";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { CustomAlert } from "@/components/ui/alert-dialog";
 
