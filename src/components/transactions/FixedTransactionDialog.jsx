@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { User } from "@/api/entities";
 import { Transaction } from "@/api/entities";
+import authService from "@/api/authService";
 import {
   Dialog,
   DialogContent,
@@ -55,7 +55,7 @@ export default function FixedTransactionDialog({
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const user = await User.me();
+        const user = await authService.getCurrentUser();
         setCurrentUser(user);
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -108,7 +108,7 @@ export default function FixedTransactionDialog({
 
       // Adicionar user_id caso não exista
       if (!submitData.user_id && currentUser) {
-        submitData.user_id = currentUser.id;
+        submitData.user_id = currentUser._id;
       }
 
       if (transaction?.id) {

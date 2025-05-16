@@ -53,16 +53,16 @@ export const loginUser = async (req, res) => {
   try {
     // Lógica especial para login admin/admin
     if (email === "admin" && password === "admin") {
-//     let adminUser = await User.findOne({ email: "admin@admin.com" }); /// Usar um email fixo para o admin
-//      if (!adminUser) {
-         // Cria o usuário admin se não existir
-//        adminUser = await User.create({
-//          full_name: "Administrador",
-//          email: "admin@admin.com", // Email único para o admin
-//          password: "admin", // A senha será hasheada pelo pre-save hook
-//          role: "admin",
-//        });
-//      }
+      let adminUser = await User.findOne({ email: "admin@admin.com" }); // Usar um email fixo para o admin
+      if (!adminUser) {
+        // Cria o usuário admin se não existir
+        adminUser = await User.create({
+          full_name: "Administrador",
+          email: "admin@admin.com", // Email único para o admin
+          password: "admin", // A senha será hasheada pelo pre-save hook
+          role: "admin",
+        });
+      }
       // Para o login admin/admin, não precisamos verificar a senha com bcrypt aqui,
       // pois o usuário pode não ter sido criado com senha hasheada se for a primeira vez.
       // No entanto, se ele já existe, a senha no banco estará hasheada.
@@ -98,21 +98,27 @@ export const loginUser = async (req, res) => {
 
 // Obter dados do usuário logado (exemplo de rota protegida)
 export const getMe = async (req, res) => {
-  // req.user é definido pelo middleware de autenticação (que ainda precisa ser criado)
+  // req.user é definido pelo middleware de autenticação
   if (!req.user) {
     return res.status(401).json({ message: "Não autorizado, token inválido ou não fornecido." });
   }
+  
   try {
-    // O método User.me espera o ID do usuário
-    const user = await User.me(req.user._id);
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).json({ message: "Usuário não encontrado." });
-    }
+    // Não precisamos buscar o usuário novamente, pois o middleware já o fez
+    // e o colocou em req.user (sem a senha)
+    res.json({
+      _id: req.user._id,
+      full_name: req.user.full_name,
+      email: req.user.email,
+      role: req.user.role,
+      currency: req.user.currency,
+      dateFormat: req.user.dateFormat,
+      profile_picture: req.user.profile_picture,
+      createdAt: req.user.createdAt,
+      updatedAt: req.user.updatedAt
+    });
   } catch (error) {
     console.error("Erro ao buscar dados do usuário:", error);
     res.status(500).json({ message: "Erro no servidor ao buscar dados do usuário.", error: error.message });
   }
 };
-

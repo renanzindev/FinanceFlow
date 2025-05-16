@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import authService from "@/api/authService";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+
+/*
 // Função para fazer a chamada de API (pode ser movida para um helper/service)
 async function loginUserApi(credentials) {
   const response = await fetch("/api/auth/login", { // Presume que o backend está em /api
@@ -20,20 +23,41 @@ async function loginUserApi(credentials) {
   }
   return data;
 }
+/*/
 
 export default function LoginPage() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Verificar se o usuário já está autenticado
+    if (authService.isAuthenticated()) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+  console.log("true");
+  
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+      e.preventDefault();
+      setLoading(true);
+      setError("");
 
-    // Tentativa de login com admin/admin (lógica de teste)
+  
+      try {
+        await authService.login(email, password);
+        navigate("/dashboard");
+      } catch (error) {
+        console.error("Erro de login:", error);
+        setError(error.message || "Falha na autenticação. Verifique suas credenciais.");
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+  /*    // Tentativa de login com admin/admin (lógica de teste)
     if (email === "admin" && password === "admin") {
       try {
         const data = await loginUserApi({ email: "admin", password: "admin" });
@@ -43,11 +67,11 @@ export default function LoginPage() {
         setError(err.message || "Falha ao logar como admin.");
       }
       setLoading(false);
-      return;
+      return; 
     }
-
+/*/
     // Login normal
-    try {
+  /*  try {
       const data = await loginUserApi({ email, password });
       localStorage.setItem("userInfo", JSON.stringify(data)); // Armazena o token e dados do usuário
       // TODO: Idealmente, o token JWT deve ser usado para chamadas subsequentes
@@ -58,56 +82,62 @@ export default function LoginPage() {
     }
     setLoading(false);
   };
+  /*/
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">FinanceFlow</CardTitle>
-          <CardDescription>Acesse sua conta para gerenciar suas finanças.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="text"
-                placeholder="seuemail@exemplo.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={loading}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="********"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={loading}
-              />
-            </div>
-            {error && <p className="text-sm text-red-500 text-center">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Entrando..." : "Entrar"}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="text-center text-sm">
-          <p>Não tem uma conta? {
-            // TODO: Adicionar link para página de registro quando criada
-            // <Link to="/register" className="text-primary hover:underline">Registre-se</Link>
-          }
-            <span className="text-muted-foreground">Entre em contato com o suporte.</span>
-          </p>
-        </CardFooter>
-      </Card>
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <div className="w-full max-w-md p-4">
+        <Card className="w-full">
+          <CardHeader className="space-y-1 text-center">
+            <CardTitle className="text-2xl font-bold">FinanceFlow</CardTitle>
+            <CardDescription>
+              Entre com suas credenciais para acessar o sistema
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {error && (
+              <Alert variant="destructive" className="mb-4">
+                <ExclamationTriangleIcon className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">E-mail</Label>
+                <Input
+                  id="email"
+                  type="text"
+                  placeholder="seu@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Senha</Label>
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Entrando..." : "Entrar"}
+              </Button>
+            </form>
+          </CardContent>
+          <CardFooter className="text-center text-sm text-muted-foreground">
+            <p className="w-full">
+              Para teste, use: <strong>admin</strong> / <strong>admin</strong>
+            </p>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 }
-

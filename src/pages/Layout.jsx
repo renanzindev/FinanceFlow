@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import authService from "@/api/authService";
 import { 
   Home, PieChart, CreditCard, Calendar, Settings, 
   TrendingUp, Menu, X, Moon, Sun, DollarSign,
@@ -38,45 +39,52 @@ export default function Layout({ children, currentPageName }) {
   const [userEmail, setUserEmail] = useState(""); // Adicionado para exibir email
   const [userRole, setUserRole] = useState("user");
   const [isLoadingUser, setIsLoadingUser] = useState(true);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      setIsLoadingUser(true);
+    
+    const fetchUser = async () => {
       try {
-        // Busca os dados do usuário da API /api/auth/me
-        const userData = await fetchApi("/api/auth/me"); 
-        setUserName(userData.full_name || "");
-        setUserEmail(userData.email || "");
-        setUserRole(userData.role || "user");
+        // Verificar se o usuário está autenticado
+        if (!authService.isAuthenticated()) {
+          navigate("/login");
+          return;
+        }
+        const userData = await authService.getCurrentUser();
+        setUserName(userName || "");
+        setUserEmail(userEmail || "");
+        setUserRole(userRole || "user");
+
+
+        
       } catch (error) {
-        console.error("Error fetching user data:", error);
-        // Se falhar ao buscar dados do usuário (ex: token inválido), redireciona para login
-        localStorage.removeItem("userInfo");
+        console.error("Erro ao buscar dados do usuário:", error);
+        // Se houver erro na autenticação, redirecionar para login
         navigate("/login");
+      } finally {
+        setLoading(false);
       }
-      setIsLoadingUser(false);
     };
 
-    const userInfo = localStorage.getItem("userInfo");
-    if (!userInfo) {
-      navigate("/login");
-    } else {
-      fetchUserData();
-    }
-    
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, [navigate, location.pathname]); // Adicionado location.pathname para re-fetch se necessário
+    fetchUser();
+  }, [navigate]);
+
+
 
   const handleLogout = () => {
-    localStorage.removeItem("userInfo");
+    authService.logout();
     navigate("/login");
   };
+    if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   
   const toggleTheme = () => {
     setDarkMode(!darkMode);
