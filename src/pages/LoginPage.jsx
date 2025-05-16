@@ -54,7 +54,7 @@ export default function LoginPage() {
       // e o estado de autenticação gerenciado globalmente (Context API, Redux, Zustand, etc.)
       navigate("/dashboard"); // Redireciona para o dashboard
     } catch (err) {
-      setError(err.message || "E-mail dasddadasdados.");
+      setError(err.message || "E-mail ou senha inválidos.");
     }
     setLoading(false);
   };

@@ -56,6 +56,7 @@ export default function UserDialog({ open, onOpenChange, onSave, user = null }) 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(formData);
+    console.log("submit ativado")
   };
 
   return (

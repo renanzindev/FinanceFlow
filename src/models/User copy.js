@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 4 , // Definir um tamanho mínimo para a senha
+    minlength: 4, // Definir um tamanho mínimo para a senha
   },
   profile_picture: {
     type: String,

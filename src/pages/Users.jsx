@@ -80,6 +80,7 @@ export default function UsersPage() {
     const checkAccess = async () => {
       setLoading(true);
       try {
+        console.log("try init")
         const userData = await User.me();
         setCurrentUser(userData);
         

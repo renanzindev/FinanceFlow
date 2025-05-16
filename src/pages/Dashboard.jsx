@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Account } from "@/api/entities";
 import { Transaction } from "@/api/entities";
 import { Category } from "@/api/entities";
-import { User } from "@/api/entities";
+import User from "@/api/entities"; 
 import { format, startOfMonth, endOfMonth, subMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 

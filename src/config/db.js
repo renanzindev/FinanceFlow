@@ -5,7 +5,7 @@ const connectDB = async () => {
     // Substitua <YOUR_MONGODB_URI> pela sua string de conexão do MongoDB
     // Exemplo local: 'mongodb://localhost:27017/financeflow'
     // Exemplo Atlas: 'mongodb+srv://<username>:<password>@<cluster-url>/financeflow?retryWrites=true&w=majority'
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/financeflow';
+    const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://renanaugusto414:FinanceFlowAplicacao@financeflow.t1z4hrn.mongodb.net/FinanceFlow?retryWrites=true&w=majority';
     await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

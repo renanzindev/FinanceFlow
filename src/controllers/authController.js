@@ -53,16 +53,16 @@ export const loginUser = async (req, res) => {
   try {
     // Lógica especial para login admin/admin
     if (email === "admin" && password === "admin") {
-      let adminUser = await User.findOne({ email: "admin@admin.com" }); // Usar um email fixo para o admin
-      if (!adminUser) {
-        // Cria o usuário admin se não existir
-        adminUser = await User.create({
-          full_name: "Administrador",
-          email: "admin@admin.com", // Email único para o admin
-          password: "admin", // A senha será hasheada pelo pre-save hook
-          role: "admin",
-        });
-      }
+//     let adminUser = await User.findOne({ email: "admin@admin.com" }); /// Usar um email fixo para o admin
+//      if (!adminUser) {
+         // Cria o usuário admin se não existir
+//        adminUser = await User.create({
+//          full_name: "Administrador",
+//          email: "admin@admin.com", // Email único para o admin
+//          password: "admin", // A senha será hasheada pelo pre-save hook
+//          role: "admin",
+//        });
+//      }
       // Para o login admin/admin, não precisamos verificar a senha com bcrypt aqui,
       // pois o usuário pode não ter sido criado com senha hasheada se for a primeira vez.
       // No entanto, se ele já existe, a senha no banco estará hasheada.
